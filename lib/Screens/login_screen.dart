@@ -7,6 +7,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -77,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                                   Icon(Icons.arrow_drop_down_sharp),
                                 ],
                               ),
-
+                         
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),

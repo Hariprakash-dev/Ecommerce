@@ -1,11 +1,17 @@
-import 'package:ecom/Screens/cart_screen.dart';
+import 'package:ecom/Provider/cart_provider.dart';
 import 'package:ecom/Screens/login_screen.dart';
-import 'package:ecom/Screens/mainscreen.dart';
-import 'package:ecom/Screens/welcome_screen.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp( MaterialApp(home: MyApp(),debugShowCheckedModeBanner: false,));
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => CartProvider())],
+      child: MyApp(),
+    ),
+    
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,6 +19,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoginScreen() ;
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen());
   }
 }
