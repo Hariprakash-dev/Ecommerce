@@ -1,5 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:ecom/Provider/cart_provider.dart';
+import 'package:ecom/Screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -160,7 +161,7 @@ class _CartScreenState extends State<CartScreen> {
                 hintText: "Add Coupon code",
                 hintStyle: TextStyle(color: Color.fromRGBO(186, 186, 186, 1)),
         
-                prefixIcon: Icon(Icons.add),
+                prefixIcon: Icon(Icons.sell),
         
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -265,21 +266,29 @@ class _CartScreenState extends State<CartScreen> {
              Divider(color: Color.fromRGBO(224, 224, 224, 1), thickness: 1),
         
             SizedBox(height: 10),
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-        
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(25)),
-                color: Colors.black,
-              ),
-              child: Center(
-                child: Text(
-                  "Proceed to Checkout",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            GestureDetector(
+              onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                  );
+                },
+              child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                      
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  color: Colors.black,
+                ),
+                child: Center(
+                  child: Text(
+                    "Proceed to Checkout",
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

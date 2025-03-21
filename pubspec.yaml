@@ -37,6 +37,7 @@ dependencies:
   provider: ^6.1.2
   badges: ^3.1.2
   dotted_line: ^3.2.3
+  syncfusion_flutter_pdfviewer: ^28.2.12
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +84,7 @@ flutter:
     - Assets/Ad/Ad5.jpeg
     - Assets/Ad/Ad6.jpeg
     - Assets/E.png
+    - Assets/PDF/payment.pdf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
