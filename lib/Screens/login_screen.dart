@@ -1,5 +1,6 @@
 import 'package:ecom/Screens/mainscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:dotted_line/dotted_line.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -26,65 +27,72 @@ class LoginScreen extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25),
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
                     color: Colors.white,
                   ),
-                  height: 400,
+                  height: 500,
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Welcome to",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Welcome to",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                " eGrocer !",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.lightGreen,
+                                Text(
+                                  " eGrocer !",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.lightGreen,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 30),
                           TextFormField(
+                            
+                            
+
                             decoration: InputDecoration(
-                              hintText: "999999",
+                              filled: true,
+                              fillColor: Color.fromRGBO(247, 247, 247, 1),
+                              prefixText: "+91",
+                              hintText: "    999999",
                               hintStyle: TextStyle(
                                 color: Color.fromRGBO(185, 185, 185, 1),
                               ),
-                              prefix: Row(
-                                children: [
-                                  Image.asset(
-                                    "Assets/flag.webp",
-                                    height: 20,
-                                    width: 20,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text("+91"),
-                                  SizedBox(width: 10),
-                                  Icon(Icons.arrow_drop_down_sharp),
-                                ],
-                              ),
+                                prefixIcon: Padding(
+                padding: const EdgeInsets.all(8.0), 
+                child: Image.asset(
+                  "Assets/flag.webp", 
+                  width: 30,
+                  height: 30,
+                  fit: BoxFit.contain,
+                ),
+              ),
+                              
                          
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
                                 borderSide: BorderSide(
-                                  color: Color.fromRGBO(185, 185, 185, 1),
+                                  color: Color.fromRGBO(247, 247, 247, 1),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -92,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                                   Radius.circular(12),
                                 ),
                                 borderSide: BorderSide(
-                                  color: Color.fromRGBO(185, 185, 185, 1),
+                                  color: Color.fromRGBO(247, 247, 247, 1),
                                 ),
                               ),
                             ),
@@ -130,39 +138,45 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 15),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text("Don't have an account?"),
-                              Text(" Register Now"),
+                              Text("Don't have an account?",style: TextStyle(
+                                      color: Color.fromRGBO(165, 167, 169, 1),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),),
+                              Text(" Register Now",style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),),
                             ],
                           ),
                           const SizedBox(height: 15),
-                          const Row(
+                          Row(
                             children: [
-                              Expanded(
-                                child: Divider(
-                                  color: Color.fromRGBO(165, 167, 169, 1),
-                                  thickness: 1,
-                                ),
+                              const Expanded(
+                                child:DottedLine(dashColor: Color.fromRGBO(165, 167, 169, 1),)
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8),
-                                child: Text(
-                                  "or",
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(165, 167, 169, 1),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
+                                padding: const EdgeInsets.all(2),
+                                child: Container(
+                                  padding: EdgeInsets.all(6),
+                                  decoration: BoxDecoration(shape: BoxShape.circle,color: Color.fromRGBO(247, 247, 247, 1)),
+                                  child: Text(
+                                    "OR",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(165, 167, 169, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
                                 ),
                               ),
-                              Expanded(
-                                child: Divider(
-                                  color: Color.fromRGBO(165, 167, 169, 1),
-                                  thickness: 1,
-                                ),
+                              const Expanded(
+                                child:DottedLine(dashColor: Color.fromRGBO(165, 167, 169, 1),)
                               ),
                             ],
                           ),
@@ -176,7 +190,8 @@ class LoginScreen extends StatelessWidget {
                                 Radius.circular(10),
                               ),
                               border: Border.all(
-                                color: Color.fromRGBO(185, 185, 185, 1),
+                                color: Colors.black,
+                                width: 1.5
                               ),
                             ),
                             child: Row(
@@ -191,14 +206,14 @@ class LoginScreen extends StatelessWidget {
                                 Text(
                                   "Continue with Google",
                                   style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w800,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 7),
                           Container(
                             height: 50,
                             width: MediaQuery.of(context).size.width,
@@ -208,14 +223,15 @@ class LoginScreen extends StatelessWidget {
                                 Radius.circular(10),
                               ),
                               border: Border.all(
-                                color: Color.fromRGBO(185, 185, 185, 1),
+                                color: Colors.black,
+                                width: 1.5
                               ),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  "Assets/g.png",
+                                  "Assets/E.png",
                                   height: 20,
                                   width: 20,
                                 ),
@@ -223,28 +239,30 @@ class LoginScreen extends StatelessWidget {
                                 Text(
                                   "Continue with email",
                                   style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w800,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 15),
                           Divider(
                             color: Color.fromRGBO(165, 167, 169, 1),
                             thickness: 1,
                           ),
+                          SizedBox(height: 15,),
                           RichText(
                             text: TextSpan(
                               text: "By Continuing, you agree to eGrocer's  ",
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(165, 165, 165, 1)
                               ),
                               children: [
                                 TextSpan(
-                                  text: "Terms of Service  ",
+                                  text: "Terms of \nService  ",
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
@@ -256,6 +274,7 @@ class LoginScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
+                                   color: Color.fromRGBO(165, 165, 165, 1)
                                   ),
                                 ),
                                 TextSpan(

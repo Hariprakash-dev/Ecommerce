@@ -35,6 +35,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
+  badges: ^3.1.2
+  dotted_line: ^3.2.3
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,20 @@ flutter:
     - Assets/pro3.jpeg
     - Assets/pro2.jpeg
     - Assets/pro4.webp
+    - Assets/pro5.jpeg
+    - Assets/pro6.jpeg
+    - Assets/pro7.jpeg
+    - Assets/pro8.jpeg
+    - Assets/pro9.jpeg
+    - Assets/pro10.jpeg
+    - Assets/pro11.jpg
+    - Assets/Ad/Ad1.jpeg
+    - Assets/Ad/Ad2.jpeg
+    - Assets/Ad/Ad3.jpeg
+    - Assets/Ad/Ad4.jpeg
+    - Assets/Ad/Ad5.jpeg
+    - Assets/Ad/Ad6.jpeg
+    - Assets/E.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

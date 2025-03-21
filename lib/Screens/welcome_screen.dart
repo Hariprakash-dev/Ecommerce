@@ -11,6 +11,14 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  final List <String> imagepath = [
+    "Assets/Ad/Ad1.jpeg",
+    "Assets/Ad/Ad2.jpeg",
+    "Assets/Ad/Ad3.jpeg",
+    "Assets/Ad/Ad4.jpeg",
+    "Assets/Ad/Ad5.jpeg",
+    "Assets/Ad/Ad6.jpeg",
+  ];
   final List<String> categories = ["Fragrance", "Skincare", "Makeup", "Hair"];
   List<String> selectedCategories = [];
   @override
@@ -31,7 +39,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Welcome back,\nOlivia"),
+                   
+                    RichText(text: TextSpan(text: "Welcome back,",style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black
+                              ),children: [
+                      TextSpan(text: "\nOlivia",style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black
+                              ),)
+                    ])),
+                    
                     Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -44,20 +64,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ],
                 ),
+                SizedBox(height: 10,),
                 SizedBox(
-                  height: 200,
+                  height: 250,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 3,
+                    itemCount: imagepath.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 120.0,
-                          width: 220.0,
+                          height: 280.0,
+                          width: 280.0,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('Assets/vegetables.jpg'),
+                              image: AssetImage(imagepath[index]),
                               fit: BoxFit.fill,
                             ),
                             borderRadius: BorderRadius.circular(18.0),
@@ -70,9 +91,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Categories"), Text("See all")],
+                  children: [Text("Categories",style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black
+                              ),), Text("See all",style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Color.fromRGBO(241, 241, 241, 1)
+                              ),)],
                 ),
-                SizedBox(height: 10),
+                
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -87,7 +116,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           
                                   shape: RoundedRectangleBorder(
                                     side: BorderSide(
-                color: selectedCategories.contains(category) ? Colors.grey : Colors.grey, 
+                color: Color.fromRGBO(244, 244, 244, 1)
               
               ),
             borderRadius: BorderRadius.circular(20),
@@ -97,7 +126,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   showCheckmark: false,
                                   color: selectedCategories.contains(category)? WidgetStatePropertyAll(Colors.blue):WidgetStatePropertyAll(Colors.white),
                                                 
-                                  label: Text(category),
+                                  label: Text(category,style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black
+                              ),),
                                   selected: selectedCategories.contains(category),
                                   onSelected: (selected) {
                                     setState(() {
@@ -114,10 +147,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             .toList(),
                   ),
                 ),
-                SizedBox(height: 10),
+                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("New arrivals"), Text("See all")],
+                  children: [Text("New arrivals",style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black
+                              ),), Text("See all",style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Color.fromRGBO(241, 241, 241, 1)
+                              ),)],
                 ),
         
                 SizedBox(
@@ -132,11 +173,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.all(
-                              Radius.circular(6),
+                              Radius.circular(16),
                             ),
                             border: Border.all(
-                              width: 0.5,
-                              color: const Color.fromRGBO(185, 185, 185, 1),
+                              width: 0.9,
+                              color: const Color.fromRGBO(244, 244, 244, 1),
                             ),
                           ),
                           child: Padding(
@@ -170,17 +211,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 ),
                                 SizedBox(height: 20),
         
-                                Row(children: [Text(product.name)]),
-                                Text("Glycolic Acid 7% To."),
-                                SizedBox(height: 10),
+                                Row(children: [Text(product.name,style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromRGBO(224, 224, 224, 1)
+                              ),)]),
+                                Text("Glycolic Acid 7% To.",style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black
+                              ),),
+                                SizedBox(height: 5),
                                 Container(
                                   decoration: BoxDecoration(
-                                    color: Color.fromRGBO(185, 185, 185, 1),
+                                    color: Color.fromRGBO(244, 244, 244, 1),
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(25),
                                     ),
                                     border: Border.all(
-                                      color: Color.fromRGBO(185, 185, 185, 1),
+                                      color: Color.fromRGBO(244, 244, 244, 1),
                                     ),
                                   ),
                                   child: Row(
@@ -190,11 +239,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       Padding(
                                         padding: const EdgeInsets.only(
                                           left: 8.0,
-                                          top: 8,
-                                          bottom: 8,
-                                          right: 15,
+                                          top: 4,
+                                          bottom: 4,
+                                          right: 35,
                                         ),
-                                        child: Text("S14.50 USD"),
+                                        child: Text("${product.rate} USD",style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black
+                              ),),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
@@ -209,7 +262,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     .addToCart(product);
                                             },
                                             child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.all(4.0),
                                               child: Icon(
                                                 Icons.add,
                                                 color: Colors.white,
