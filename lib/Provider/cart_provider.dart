@@ -27,13 +27,13 @@ class CartProvider extends ChangeNotifier {
   }
 
   double get totalproductprice {
-  return cartItems.entries.fold(0, (sum, entry) {
-    final product = entry.key;
-    final quantity = entry.value;
-    return sum + (product.rate * quantity);
-  });
-}
- 
+    return cartItems.entries.fold(0, (sum, entry) {
+      final product = entry.key;
+      final quantity = entry.value;
+      return sum + (product.rate * quantity);
+    });
+  }
+
   double get totalPrice {
     double subtotal = cartItems.entries.fold(0, (sum, entry) {
       final product = entry.key;
@@ -43,15 +43,18 @@ class CartProvider extends ChangeNotifier {
 
     double deliverycharges = 35;
     double securedpackagingfee = 10;
-   
 
-     return subtotal + deliverycharges + securedpackagingfee;
+    return subtotal + deliverycharges + securedpackagingfee;
   }
 
   int get cartItemCount {
     return _cartItems.length;
   }
 
+  double get shippingdetails {
+    double tax = 60;
+    double shipping = 10;
 
+    return totalproductprice + tax + shipping;
+  }
 }
-

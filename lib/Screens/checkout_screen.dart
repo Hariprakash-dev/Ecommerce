@@ -1,14 +1,18 @@
+import 'package:ecom/Provider/cart_provider.dart';
 import 'package:ecom/Screens/pdf_screen.dart';
+import 'package:ecom/Widgets/create_pdf.dart';
+import 'package:ecom/Widgets/pdf_generator.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+     final prices = Provider.of<CartProvider>(context);
     return Scaffold(
-      backgroundColor: Color.fromRGBO(9, 86, 176, 1),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -18,11 +22,18 @@ class CheckoutScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => PdfScreen()),
               );
+            },
+            icon: Icon(Icons.picture_as_pdf, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () async {
+              final pdffile = await PdfGenerator.generate(context);
+              SaveAndOpenDocument.openPdf(pdffile);
             },
             icon: Icon(Icons.print, color: Colors.white),
           ),
@@ -51,7 +62,7 @@ class CheckoutScreen extends StatelessWidget {
                   Text(
                     "Shipping Address",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -59,7 +70,7 @@ class CheckoutScreen extends StatelessWidget {
                   Text(
                     "Add",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -75,7 +86,7 @@ class CheckoutScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
-                    color: Color.fromRGBO(0, 118, 206, 1),
+                    border: Border.all(color: Colors.black),
                   ),
 
                   child: Column(
@@ -116,7 +127,7 @@ class CheckoutScreen extends StatelessWidget {
                   Text(
                     "Payment",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -124,15 +135,50 @@ class CheckoutScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 5),
-              payment("Credit/Debit/ATM Card", Icons.wallet),
+              payment(
+                context,
+                "Credit/Debit/ATM Card",
+                Icons.wallet,
+                "Card Number",
+                buttons(context, "Confirm"),
+                textform(),
+              ),
               SizedBox(height: 10),
-              payment("UPI", Icons.phone_iphone),
+              payment(
+                context,
+                "UPI",
+                Icons.phone_iphone,
+                "UPI ID",
+                buttons(context, "Confirm"),
+                textform(),
+              ),
               SizedBox(height: 10),
-              payment("Net Banking", Icons.language),
+              payment(
+                context,
+                "Net Banking",
+                Icons.language,
+                "Card Number",
+                buttons(context, "Confirm"),
+                textform(),
+              ),
               SizedBox(height: 10),
-              payment("Cash On Delivery", Icons.money),
+              payment(
+                context,
+                "Cash On Delivery",
+                Icons.money,
+                "Payment",
+                buttons(context, "Confirm"),
+                textform(),
+              ),
               SizedBox(height: 10),
-              payment("Wallet", Icons.account_balance_wallet),
+              payment(
+                context,
+                "Wallet",
+                Icons.account_balance_wallet,
+                "Card Number",
+                buttons(context, "Confirm"),
+                textform(),
+              ),
               SizedBox(height: 10),
               Row(
                 children: [
@@ -151,17 +197,17 @@ class CheckoutScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Sub Total(3 Items)",
+                    "Sub Total(${prices.cartItemCount} Items)",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
-                    "AED 0.0",
+                    "${prices.totalproductprice}",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -176,7 +222,7 @@ class CheckoutScreen extends StatelessWidget {
                     text: TextSpan(
                       text: "Coupon",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),
@@ -194,7 +240,7 @@ class CheckoutScreen extends StatelessWidget {
                   ),
 
                   Text(
-                    "-AED 0.0",
+                    "0",
                     style: TextStyle(
                       color: Color.fromRGBO(77, 171, 37, 1),
                       fontSize: 12,
@@ -210,13 +256,13 @@ class CheckoutScreen extends StatelessWidget {
                   Text(
                     "Delivery Charges",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
-                    "AED 35.0",
+                    "35.0",
                     style: TextStyle(
                       color: Color.fromRGBO(77, 171, 37, 1),
                       fontSize: 12,
@@ -232,15 +278,15 @@ class CheckoutScreen extends StatelessWidget {
                   Text(
                     "Secured Packaging Fee",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
-                    "AED 10.0",
+                    "10.0",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -256,15 +302,15 @@ class CheckoutScreen extends StatelessWidget {
                   Text(
                     "Total Amount",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
-                    "AED 440.0",
+                    "${prices.totalPrice}",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -274,25 +320,7 @@ class CheckoutScreen extends StatelessWidget {
               SizedBox(height: 10),
               Divider(color: Color.fromRGBO(89, 154, 219, 1)),
               SizedBox(height: 10),
-              Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                  color: Colors.black,
-                ),
-                child: Center(
-                  child: Text(
-                    "Confirm Order",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              buttons(context, "Confirm Order"),
             ],
           ),
         ),
@@ -300,43 +328,98 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  Row payment(String text, IconData icons) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(0, 118, 206, 1),
-                borderRadius: BorderRadius.all(Radius.circular(6)),
-              ),
-              child: Icon(icons, color: Colors.white),
-            ),
-            SizedBox(width: 10),
-            Text(
-              text,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
+  ExpansionTile payment(
+    BuildContext context,
+    String title,
+    IconData icons,
+    String text,
+    Container buttonss,
+    TextFormField form,
+  ) {
+    return ExpansionTile(
+      title: Text(
+        title,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
         ),
-        IconButton(
-          onPressed: null,
-          icon: Icon(Icons.keyboard_arrow_down, color: Colors.white),
+      ),
+      leading: Icon(icons, color: Colors.black),
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.blue),
+              borderRadius: BorderRadius.all(Radius.circular(6)),
+              color: Colors.white,
+            ),
+
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(12),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [Text(text)],
+                ),
+                form,
+                SizedBox(height: 10),
+                buttonss,
+              ],
+            ),
+          ),
         ),
       ],
+    );
+  }
+
+  TextFormField textform() {
+    return TextFormField(
+      decoration: InputDecoration(
+        suffixIcon: Icon(Icons.wallet),
+        hintText: "XXXXXX",
+        fillColor: Colors.white,
+
+        filled: true,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+      ),
+    );
+  }
+
+  Container buttons(BuildContext context, String text) {
+    return Container(
+      height: 50,
+      width: MediaQuery.of(context).size.width,
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(25)),
+        border: Border.all(color: Colors.black),
+        color: Colors.black,
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 
   Text text(String text) => Text(
     text,
     style: TextStyle(
-      color: Colors.white,
+      color: Colors.black,
       fontSize: 14,
       fontWeight: FontWeight.w500,
     ),
