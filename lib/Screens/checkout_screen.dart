@@ -1,5 +1,8 @@
+import 'package:ecom/Provider/address_provider.dart';
 import 'package:ecom/Provider/cart_provider.dart';
+import 'package:ecom/Screens/add_address.dart';
 import 'package:ecom/Screens/pdf_screen.dart';
+import 'package:ecom/Screens/save_address.dart';
 import 'package:ecom/Widgets/create_pdf.dart';
 import 'package:ecom/Widgets/pdf_generator.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +13,11 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final prices = Provider.of<CartProvider>(context);
+    final prices = Provider.of<CartProvider>(context);
+    final addressprovider = Provider.of<AddressProvider>(
+      context,
+      listen: false,
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -67,12 +74,20 @@ class CheckoutScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text(
-                    "Add",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SaveAddress()),
+                      );
+                    },
+                    child: Text(
+                      "Add",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -92,30 +107,48 @@ class CheckoutScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      text("naushath@gmail.com"),
-                      SizedBox(height: 10),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          text("NewYork,USA"),
-                          Container(
-                            height: 20,
-                            width: 20,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black, width: 1),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(4),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      text("18,Sun city,"),
-
-                      SizedBox(height: 10),
-                      text("41230"),
+                      Text(addressprovider.selectedAddress?.name ?? "null",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),),
+                      Text(addressprovider.selectedAddress?.phno ?? "null",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),),
+                      Text(addressprovider.selectedAddress?.buildingno ?? "null",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),),
+                      Text(addressprovider.selectedAddress?.roadno ?? "null",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),),
+                       Text(addressprovider.selectedAddress?.city ?? "null",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),),
+                      Text(addressprovider.selectedAddress?.state ?? "null",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),),
+                       Text(addressprovider.selectedAddress?.pincode ?? "null",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),),
                     ],
                   ),
                 ),
