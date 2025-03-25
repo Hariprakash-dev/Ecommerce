@@ -53,8 +53,10 @@ class Address {
 class AddressProvider with ChangeNotifier {
   List<Address> _addresses = [];
   Address? _selectedAddress;
+   bool _isLoading = false;
   List<Address> get addresses => _addresses;
   Address? get selectedAddress => _selectedAddress;
+  bool get isLoading => _isLoading;
   AddressProvider() {
     print("tapppppp");
     _loadAddresses();
@@ -73,34 +75,55 @@ class AddressProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void selectAddress(Address address) async {
+ void selectAddress(Address? address) async {
+  _isLoading = true;
+  notifyListeners();  
+
+  if (_selectedAddress == address) {
+    _selectedAddress = null;
+  } else {
     _selectedAddress = address;
-    print("selecteed");
-    await _saveSelectedAddress();
-    notifyListeners();
   }
+   await _saveSelectedAddress();
+
+  _isLoading = false;
+  notifyListeners();  
+}
+
+
+
 
   Future<void> _saveSelectedAddress() async {
     final prefs = await SharedPreferences.getInstance();
     if (_selectedAddress != null) {
-      String addressjson = jsonEncode(_selectedAddress!.tojson());
-      await prefs.setString("SelectedAddress", addressjson);
+      String addressJson = jsonEncode(_selectedAddress!.tojson());
+      await prefs.setString("SelectedAddress", addressJson);
+      print("Saved Selected Address: $addressJson");
     } else {
-      await prefs.remove("selectedAddress");
+      await prefs.remove("SelectedAddress");
+      print("Removed Selected Address");
     }
+    
   }
 
   Future<void> _loadSelectedAddress() async {
     final prefs = await SharedPreferences.getInstance();
-    String? saveAddress = prefs.getString("SelectedAddress");
-    if (saveAddress != null) {
+    String? savedAddress = prefs.getString("SelectedAddress");
+
+    if (savedAddress != null) {
       try {
-        _selectedAddress = Address.fromJson(jsonDecode(saveAddress));
-        notifyListeners();
+        _selectedAddress = Address.fromJson(jsonDecode(savedAddress));
+        print("Loaded Selected Address: $_selectedAddress");
       } catch (e) {
-        print("Error loadingdnfsdnlkjs");
+        print(" Error loading selected address: $e");
       }
+    } else {
+      print("No Selected Address");
     }
+
+    Future.delayed(Duration(milliseconds: 100), () {
+      notifyListeners();
+    });
   }
 
   Future<void> _saveAddresses() async {
@@ -122,13 +145,5 @@ class AddressProvider with ChangeNotifier {
     }
   }
 
-  // void addressSelection(Address address) async {
-  //   if (_selectedAddress?.toString() == address.toString()) {
-  //     _selectedAddress = null;
-  //   } else {
-  //     _selectedAddress = address;
-  //   }
-  //   notifyListeners();
-  //   await _saveSelectedAddress();
-  // }
+  
 }

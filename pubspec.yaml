@@ -42,6 +42,7 @@ dependencies:
   path_provider: ^2.1.5
   open_file: ^3.5.10
   shared_preferences: ^2.5.2
+  intl_phone_field: ^3.2.0
 
 dev_dependencies:
   flutter_test:

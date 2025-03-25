@@ -1,6 +1,7 @@
 import 'package:ecom/Screens/mainscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -64,29 +65,13 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 30),
-                          TextFormField(
-                            
-                            
 
+                          IntlPhoneField(
                             decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Color.fromRGBO(247, 247, 247, 1),
-                              prefixText: "+91",
-                              hintText: "    999999",
-                              hintStyle: TextStyle(
-                                color: Color.fromRGBO(185, 185, 185, 1),
-                              ),
-                                prefixIcon: Padding(
-                padding: const EdgeInsets.all(8.0), 
-                child: Image.asset(
-                  "Assets/flag.webp", 
-                  width: 30,
-                  height: 30,
-                  fit: BoxFit.contain,
-                ),
-              ),
-                              
-                         
+                              labelText: "Enter Phone Number",
+                              labelStyle: TextStyle(color: Color.fromRGBO(165, 167, 169, 1),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
@@ -105,6 +90,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+             
                           SizedBox(height: 10),
                           GestureDetector(
                             onTap: () {

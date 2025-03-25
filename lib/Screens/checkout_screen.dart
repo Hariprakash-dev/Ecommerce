@@ -1,6 +1,5 @@
 import 'package:ecom/Provider/address_provider.dart';
 import 'package:ecom/Provider/cart_provider.dart';
-import 'package:ecom/Screens/add_address.dart';
 import 'package:ecom/Screens/pdf_screen.dart';
 import 'package:ecom/Screens/save_address.dart';
 import 'package:ecom/Widgets/create_pdf.dart';
@@ -104,52 +103,82 @@ class CheckoutScreen extends StatelessWidget {
                     border: Border.all(color: Colors.black),
                   ),
 
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(addressprovider.selectedAddress?.name ?? "null",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),),
-                      Text(addressprovider.selectedAddress?.phno ?? "null",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),),
-                      Text(addressprovider.selectedAddress?.buildingno ?? "null",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),),
-                      Text(addressprovider.selectedAddress?.roadno ?? "null",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),),
-                       Text(addressprovider.selectedAddress?.city ?? "null",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),),
-                      Text(addressprovider.selectedAddress?.state ?? "null",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),),
-                       Text(addressprovider.selectedAddress?.pincode ?? "null",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),),
-                    ],
+                  child: FutureBuilder(
+                    future: Future.delayed(
+                      Duration(milliseconds: 100),
+                    ), 
+                    builder: (context, snapshot) {
+                      final addressProvider = Provider.of<AddressProvider>(
+                        context,
+                      );
+
+                      if (addressProvider.selectedAddress == null) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            addressprovider.selectedAddress?.name ?? "null",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            addressprovider.selectedAddress?.phno ?? "null",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            addressprovider.selectedAddress?.buildingno ??
+                                "null",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            addressprovider.selectedAddress?.roadno ?? "null",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            addressprovider.selectedAddress?.city ?? "null",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            addressprovider.selectedAddress?.state ?? "null",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            addressprovider.selectedAddress?.pincode ?? "null",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
