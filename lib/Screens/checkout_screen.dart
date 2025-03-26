@@ -38,7 +38,8 @@ class CheckoutScreen extends StatelessWidget {
           ),
           IconButton(
             onPressed: () async {
-              final pdffile = await PdfGenerator.generate(context);
+              final pdfGenerator = PdfGenerator();
+              final pdffile = await pdfGenerator.generate(context);
               SaveAndOpenDocument.openPdf(pdffile);
             },
             icon: Icon(Icons.print, color: Colors.white),
@@ -104,9 +105,7 @@ class CheckoutScreen extends StatelessWidget {
                   ),
 
                   child: FutureBuilder(
-                    future: Future.delayed(
-                      Duration(milliseconds: 100),
-                    ), 
+                    future: Future.delayed(Duration(milliseconds: 100)),
                     builder: (context, snapshot) {
                       final addressProvider = Provider.of<AddressProvider>(
                         context,
